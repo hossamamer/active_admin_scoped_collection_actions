@@ -9,7 +9,8 @@ module ActiveAdminScopedCollectionActions
         options[:title] = I18n.t('active_admin_scoped_collection_actions.actions.update') if options[:title].nil?
         add_scoped_collection_action_default_update(options, &block)
       else
-        batch_action(name, if: proc { false }, &block)
+        options[:if] = proc { false }
+        batch_action(name, options, &block)
       end
       # sidebar button
       config.add_scoped_collection_action(name, options)
